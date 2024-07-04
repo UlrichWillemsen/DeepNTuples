@@ -248,6 +248,7 @@ use_x509userproxy = True
 +MaxRuntime = {maxruntime}
 max_transfer_output_mb = {maxsize}
 RequestCpus = 2
+requirements = (OpSysAndVer =?= "AlmaLinux9")
 transfer_output_remaps = "stdout.txt={logdir}con_out.$(ProcId).out"
 max_retries = 20
 queue {njobs}
@@ -281,6 +282,7 @@ environment = "NTUPLEOUTFILEPATH={ntupledir}{outputfile}_{job}.root"
 use_x509userproxy = True
 +MaxRuntime= {maxruntime}
 RequestCpus = 2
+requirements = (OpSysAndVer =?= "AlmaLinux9")
 max_transfer_output_mb = {maxsize}
 transfer_output_remaps = "stdout.txt={logdir}con_out.{job}.out"
 max_retries = 3
@@ -385,7 +387,7 @@ else
    then
      cp $OUTPUT*.root $NTUPLEOUTFILEPATH
    else
-     eoscp $OUTPUT*.root $NTUPLEOUTFILEPATH
+     xrdcp $OUTPUT*.root root://eosuser.cern.ch//eos/user/u/uwillems/$NTUPLEOUTFILEPATH
    fi
    exitstatus=$?
    rm -f $OUTPUT*.root
